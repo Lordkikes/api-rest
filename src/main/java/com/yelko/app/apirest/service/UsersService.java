@@ -21,4 +21,6 @@ public interface UsersService {
 
     void deleteById(Long id);
 
+    void update(UserRequest user, Long id);
+
 }

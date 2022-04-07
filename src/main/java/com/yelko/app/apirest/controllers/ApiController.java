@@ -1,6 +1,7 @@
 package com.yelko.app.apirest.controllers;
 
 import com.yelko.app.apirest.dto.UserRequest;
+import com.yelko.app.apirest.dto.UsersDTO;
 import com.yelko.app.apirest.service.UsersService;
 import com.yelko.app.apirest.utils.exceptions.ApiUnprocessableEntityException;
 import com.yelko.app.apirest.validator.UsersValidator;
@@ -40,6 +41,20 @@ public class ApiController {
 
         this.validator.validator(request);
         this.usersService.save(request);
+        return ResponseEntity.ok(Boolean.TRUE);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable ("id") Long id){
+        usersService.deleteById(id);
+
+        return ResponseEntity.ok(Boolean.TRUE);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Object> updateUser(@RequestBody UserRequest request, @PathVariable ("id") Long id){
+
+        usersService.update(request, id);
         return ResponseEntity.ok(Boolean.TRUE);
 
     }

@@ -72,6 +72,21 @@ public class UsersServiceImpl implements UsersService {
 
     }
 
+    @Override
+    public void update(UserRequest request, Long id) {
+        Optional<UsersEntity> user = this.usersRepository.findById(id);
+        UsersEntity users = user.get();
+        users.setFirstName(request.getFirstName());
+        users.setLastName(request.getLastName());
+        users.setUsername(request.getUsername());
+
+        if (!request.getPassword().isEmpty()){
+            users.setPassword(BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
+        }
+        this.usersRepository.save(users);
+
+    }
+
     private UsersDTO convertToUsersDTO(final UsersEntity user){
         return Helpers.modelMapper().map(user, UsersDTO.class);
     }
