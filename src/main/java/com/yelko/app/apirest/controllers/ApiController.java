@@ -1,7 +1,7 @@
 package com.yelko.app.apirest.controllers;
 
+import com.yelko.app.apirest.dto.UserRequest;
 import com.yelko.app.apirest.service.UsersService;
-import com.yelko.app.apirest.service.implementation.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +28,13 @@ public class ApiController {
     @GetMapping(value = "/username/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findById(@PathVariable ("id") Long id){
         return ResponseEntity.ok(this.usersService.findById(id));
+    }
+
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> saveUser(@RequestBody UserRequest request){
+
+        this.usersService.save(request);
+        return ResponseEntity.ok(Boolean.TRUE);
+
     }
 }

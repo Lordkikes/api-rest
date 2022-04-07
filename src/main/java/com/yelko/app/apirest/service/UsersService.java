@@ -1,7 +1,7 @@
 package com.yelko.app.apirest.service;
 
+import com.yelko.app.apirest.dto.UserRequest;
 import com.yelko.app.apirest.dto.UsersDTO;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +16,9 @@ public interface UsersService {
 
     UsersDTO findById(Long id);
 
-    void save(UsersDTO user);
+    void save(UserRequest user);
 
-    void saveAll(List<UsersDTO> users);
+    void saveAll(List<UserRequest> users);
 
     void deleteById(Long id);
 

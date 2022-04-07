@@ -1,9 +1,11 @@
 package com.yelko.app.apirest.service.implementation;
 
+import com.yelko.app.apirest.dto.UserRequest;
 import com.yelko.app.apirest.dto.UsersDTO;
 import com.yelko.app.apirest.entities.UsersEntity;
 import com.yelko.app.apirest.repository.UsersRepository;
 import com.yelko.app.apirest.service.UsersService;
+import com.yelko.app.apirest.utils.BCrypt;
 import com.yelko.app.apirest.utils.Helpers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,15 +49,18 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public void save(UsersDTO user) {
+    public void save(UserRequest user) {
         UsersEntity users = Helpers.modelMapper().map(user, UsersEntity.class);
+
+        users.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+
         this.usersRepository.save(users);
     }
 
     @Override
-    public void saveAll(List<UsersDTO> users) {
+    public void saveAll(List<UserRequest> users) {
         List<UsersEntity> us = new ArrayList<>();
-        for (UsersDTO user : users) {
+        for (UserRequest user : users) {
             UsersEntity usu = Helpers.modelMapper().map(user, UsersEntity.class);
             us.add(usu);
         }
