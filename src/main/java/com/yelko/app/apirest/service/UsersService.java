@@ -5,7 +5,6 @@ import com.yelko.app.apirest.dto.UsersDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface UsersService {

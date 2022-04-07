@@ -1,4 +1,4 @@
-package com.yelko.app.apirest.utils;
+package com.yelko.app.apirest.utils.hash;
 import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 

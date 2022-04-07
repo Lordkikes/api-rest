@@ -1,4 +1,4 @@
-package com.yelko.app.apirest.utils;
+package com.yelko.app.apirest.utils.helpers;
 
 import org.modelmapper.ModelMapper;
 

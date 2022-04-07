@@ -5,10 +5,9 @@ import com.yelko.app.apirest.dto.UsersDTO;
 import com.yelko.app.apirest.entities.UsersEntity;
 import com.yelko.app.apirest.repository.UsersRepository;
 import com.yelko.app.apirest.service.UsersService;
-import com.yelko.app.apirest.utils.BCrypt;
-import com.yelko.app.apirest.utils.Helpers;
+import com.yelko.app.apirest.utils.hash.BCrypt;
+import com.yelko.app.apirest.utils.helpers.Helpers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

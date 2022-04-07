@@ -2,6 +2,8 @@ package com.yelko.app.apirest.controllers;
 
 import com.yelko.app.apirest.dto.UserRequest;
 import com.yelko.app.apirest.service.UsersService;
+import com.yelko.app.apirest.utils.exceptions.ApiUnprocessableEntityException;
+import com.yelko.app.apirest.validator.UsersValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,9 @@ public class ApiController {
 
     @Autowired
     UsersService usersService;
+
+    @Autowired
+    UsersValidator validator;
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> index(){
@@ -31,8 +36,9 @@ public class ApiController {
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> saveUser(@RequestBody UserRequest request){
+    public ResponseEntity<Object> saveUser(@RequestBody UserRequest request) throws ApiUnprocessableEntityException {
 
+        this.validator.validator(request);
         this.usersService.save(request);
         return ResponseEntity.ok(Boolean.TRUE);
 
