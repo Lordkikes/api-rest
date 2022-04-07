@@ -20,10 +20,17 @@ public class UsersServiceImpl implements UsersService {
     private UsersRepository usersRepository;
 
     @Override
-    public Page<UsersDTO> findAll() {
-        Page<UsersEntity> users = this.usersRepository.findAll();
+    public List<UsersDTO> findAll() {
 
-        return users.map(this::convertToUsersDTO);
+        List<UsersDTO> dto = new ArrayList<>();
+        Iterable<UsersEntity> users = this.usersRepository.findAll();
+
+        for (UsersEntity user : users) {
+            UsersDTO usersDTO = Helpers.modelMapper().map(user, UsersDTO.class);
+            dto.add(usersDTO);
+        }
+
+        return dto;
     }
 
     @Override

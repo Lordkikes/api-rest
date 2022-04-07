@@ -14,6 +14,4 @@ public interface UsersRepository extends CrudRepository<UsersEntity, Long> {
     @Transactional(readOnly = true)
     Optional<UsersEntity> findByUsername(String username);
 
-    @Override
-    Page<UsersEntity> findAll();
 }

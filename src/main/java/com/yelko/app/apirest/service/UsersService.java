@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public interface UsersService {
 
-    Page<UsersDTO> findAll();
+    List<UsersDTO> findAll();
 
     UsersDTO findByUsername(String username);
 
